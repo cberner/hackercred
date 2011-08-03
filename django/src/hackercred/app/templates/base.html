@@ -17,7 +17,7 @@
       <div id="login">
         <p>
           {% if user.is_authenticated %}
-            {{user.username}} (<a href='{% url app.views.logout %}'>logout</a>)
+            <a href='{% url app.views.view_user user.id %}'>{{user.username}}</a> (<a href='{% url app.views.logout %}'>logout</a>)
           {% else %}
             <a href='{% url django.contrib.auth.views.login %}'>login</a>
           {% endif %}

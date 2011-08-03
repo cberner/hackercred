@@ -1,3 +1,8 @@
 {% extends "base.html" %}
-
-Hi
+{% block content %}
+<ul>
+{% for link in viewed_user.links.all %}
+	<li><a href='{{link.url}}'>{{link.display_type}}</a></li>
+{% endfor %}
+</ul>
+{% endblock %}

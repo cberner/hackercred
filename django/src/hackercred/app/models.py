@@ -18,3 +18,9 @@ class Link(models.Model):
     type = models.CharField(max_length=64, choices=TYPES)
     created_at = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(User, related_name='links')
+    
+    def display_type(self):
+        for t,d in Link.TYPES:
+            if t == self.type:
+                return d
+        assert False

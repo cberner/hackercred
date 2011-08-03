@@ -11,8 +11,8 @@ def index(request):
     return render_to_response("index.html", context_instance=RequestContext(request))
 
 def view_user(request, id):
-    user = User.objects.get(id)
-    return render_to_response("view_user.html", {'user': user}, context_instance=RequestContext(request))
+    viewed_user = User.objects.get(id=id)
+    return render_to_response("view_user.html", {'viewed_user': viewed_user}, context_instance=RequestContext(request))
 
 def logout(request):
     django_logout(request)
