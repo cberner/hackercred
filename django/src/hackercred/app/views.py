@@ -1,5 +1,6 @@
 from django.contrib.auth import logout as django_logout, login as django_login, \
     authenticate
+from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
@@ -8,6 +9,10 @@ from hackercred.app.forms import RegistrationForm
 
 def index(request):
     return render_to_response("index.html", context_instance=RequestContext(request))
+
+def view_user(request, id):
+    user = User.objects.get(id)
+    return render_to_response("view_user.html", {'user': user}, context_instance=RequestContext(request))
 
 def logout(request):
     django_logout(request)
