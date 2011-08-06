@@ -1,8 +1,40 @@
 {% extends "base.html" %}
 {% block content %}
-<ul>
-{% for link in viewed_user.links.all %}
-	<li><a href='{{link.url}}'>{{link.display_type}}</a></li>
-{% endfor %}
-</ul>
+
+<div id="sidebar">
+	<img src="/static/no_profile_pic.png" />
+	<ul>
+		{% for link in viewed_user.links.all %}
+			<li><a href='{{link.url}}'>{{link.display_type}}</a></li>
+		{% endfor %}
+	</ul>
+</div>
+<div id="main">
+	<div id="basic-info">
+		<p>{{viewed_user.get_full_name}}</p>
+		<p>Recommendations: {{num_recommendations}} News Articles: {{num_articles}} Projects: {{num_projects}}</p>
+	</div>
+	<div id="creds">
+		{% for cred in viewed_user.creds.all %}
+			<div class="cred {% cycle 'left' 'right' %}">
+				{% if cred.type == "CONTRIBUTE" %}
+					<div>{{viewed_user.get_full_name}} contributed to {{cred.project_name}}</div>
+					<div>{{cred.text}}</div>
+					<div>added by {{cred.added_by.get_full_name}} on {{cred.created_at}}</div>
+				{% else %}
+					{% if cred.type == "ARTICLE" %}
+						<div><a href="{{cred.external_url}}">{{cred.external_url}}</a></div>
+						<div>{{cred.text}}</div>
+						<div>added by {{cred.added_by.get_full_name}} on {{cred.created_at}}</div>
+					{% else %}
+						<div>{{cred.added_by.get_full_name}} recommended {{viewed_user.get_full_name}}</div>
+						<div>{{cred.text}}</div>
+						<div>on {{cred.created_at}}</div>
+					{% endif %}
+				{% endif %}
+			</div>
+		{% endfor %}
+	</div>
+</div>
+
 {% endblock %}

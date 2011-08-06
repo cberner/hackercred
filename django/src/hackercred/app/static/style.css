@@ -1,0 +1,85 @@
+#headerbg {
+	background-color: gray;
+	min-width: 100%;
+	min-height: 50px;
+	margin-left: 0px;
+	margin-right: 0px;
+}
+
+#header {
+	width: 960px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#logo {
+	float: left;
+}
+
+#login {
+	float: right;
+}
+
+#content {
+	width: 960px;
+	height: 100%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#sidebar {
+	height: 100%;
+	width: 130px;
+	float: left;
+	border-right: 1px solid #555555;
+	padding: 5px 5px 0 0;
+}
+
+#sidebar ul {
+	padding: 20px;
+}
+
+#main {
+	padding-left: 5px;
+	width: 818px;
+	float: right;
+}
+
+#creds {
+	clear: both;
+}
+
+#basic-info {
+	margin: 5px 0 20px 0;
+}
+
+.cred {
+	margin: 4px 4px 8px 4px;
+	width: 393px;
+	padding: 3px;
+	border: 1px solid gray;
+	border-radius: 5px;
+}
+
+.left {
+	float: left;
+	clear: left;
+}
+
+.right {
+	float: right;
+	clear: right;
+}
+
+body {
+	margin: 0px;
+	height: 100%;
+	background-color: #FCFCFC;
+}
+
+html {
+	/* Force vertical scrollbar to appear */
+	overflow-y: scroll;
+	height: 100%;
+	margin-bottom: 1px;
+}

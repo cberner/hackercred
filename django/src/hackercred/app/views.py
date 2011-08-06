@@ -12,7 +12,14 @@ def index(request):
 
 def view_user(request, id):
     viewed_user = User.objects.get(id=id)
-    return render_to_response("view_user.html", {'viewed_user': viewed_user}, context_instance=RequestContext(request))
+    num_recommendations = viewed_user.creds.filter(type="RECOMMEND").exclude(added_by=id).count()
+    num_articles = viewed_user.creds.filter(type="ARTICLE").count()
+    num_projects = viewed_user.creds.filter(type="CONTRIBUTE").count()
+    return render_to_response("view_user.html", {'viewed_user': viewed_user, 
+                                                 'num_recommendations' : num_recommendations, 
+                                                 'num_articles' : num_articles,
+                                                 'num_projects' : num_projects},
+                              context_instance=RequestContext(request))
 
 def logout(request):
     django_logout(request)

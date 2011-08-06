@@ -1,7 +1,8 @@
 from django.conf.urls.defaults import patterns, include, url
+from django.contrib import admin
+import settings
 
 # Uncomment the next two lines to enable the admin:
-from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
@@ -20,3 +21,9 @@ urlpatterns = patterns('',
     (r'^register/$', 'app.views.register'),
     (r'^user/(?P<id>[0-9]+)/$', 'app.views.view_user'),
 )
+
+if settings.DEBUG:
+    urlpatterns += patterns('',
+        (r'^static/(?P<path>.*)$', 'django.views.static.serve', 
+         {'document_root': '/home/christopher/Code/hackercred/src/hackercred/app/static'}),
+    )

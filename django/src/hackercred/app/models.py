@@ -3,7 +3,7 @@ from django.db import models
 
 class Cred(models.Model):
     TYPES = (("RECOMMEND", "Recommendation"), ("ARTICLE", "Article"), 
-             ("CONTRIBUTE", "Contribution"))
+             ("CONTRIBUTE", "Contribution"), ("POST", "Post"))
     text = models.TextField()
     #Only used for CONTRIBUTE
     project_name = models.CharField(max_length=128, blank=True)
