@@ -8,7 +8,9 @@ from django.template.context import RequestContext
 from hackercred.app.forms import RegistrationForm
 
 def index(request):
-    return render_to_response("index.html", context_instance=RequestContext(request))
+    users = User.objects.all()
+    return render_to_response("index.html", {'users' : users}, 
+                              context_instance=RequestContext(request))
 
 def view_user(request, id):
     viewed_user = User.objects.get(id=id)
