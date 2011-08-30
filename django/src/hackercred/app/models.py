@@ -2,17 +2,19 @@ from django.contrib.auth.models import User
 from django.db import models
 
 class Cred(models.Model):
-    TYPES = (("RECOMMEND", "Recommendation"), ("ARTICLE", "Article"), 
-             ("CONTRIBUTE", "Contribution"), ("POST", "Post"))
+    TYPES = (("PROJECT", "Project"), ("COMMENT", "Comment"))
     text = models.TextField()
-    #Only used for CONTRIBUTE
+    #Only used for PROJECT
     project_name = models.CharField(max_length=128, blank=True)
-    #Only used for article or contribution
+    #Only used for project
     external_url = models.URLField(blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     added_by = models.ForeignKey(User, related_name='+')
     type = models.CharField(max_length=64, choices=TYPES)
     user = models.ForeignKey(User, related_name='creds')
+    
+    def __unicode__(self):
+        return "%s [%s] %s" % (self.user, self.type, self.text)
     
 class Link(models.Model):
     TYPES = (("FACEBOOK", "Facebook"), ("LINKEDIN", "LinkedIn"), 
