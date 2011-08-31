@@ -10,6 +10,8 @@ if [ "$1" == "deploy" ]; then
 	echo
 	python manage.py migrate app
 	echo
+	python manage.py collectstatic --noinput
+	echo
 	/etc/init.d/apache2 restart
 	echo
 	echo "mission accomplished!"
