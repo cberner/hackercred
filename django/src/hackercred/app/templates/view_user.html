@@ -42,6 +42,13 @@
 					<div>on {{cred.created_at|date:"M j, Y"}}</div>
 				</div>
 			{% endfor %}
+			{% if not edit_mode %}
+				<form action="{% url app.views.create_comment %}" method="POST">
+					{% csrf_token %}
+					{{add_comment_form.as_p}}
+					<input type='submit' value="Comment">
+				</form>
+			{% endif %}
 		</div>
 		<div id="projects" class="right">
 			<p>Projects</p>

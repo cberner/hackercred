@@ -57,7 +57,12 @@ class PartialProjectForm(forms.ModelForm):
         exclude = ('added_by')
         widgets = {'user': forms.HiddenInput(), 'type' : forms.HiddenInput()}
 
-
+class PartialCommentForm(forms.ModelForm):
+    class Meta:
+        model = Cred
+        fields = ('text', 'user', 'type')
+        exclude = ('project_name', 'external_url')
+        widgets = {'user': forms.HiddenInput(), 'type' : forms.HiddenInput()}
 
 
 

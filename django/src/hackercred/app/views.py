@@ -8,7 +8,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.template.context import RequestContext
 from hackercred.app.forms import RegistrationForm, PartialLinkForm, \
-    PartialProjectForm
+    PartialProjectForm, PartialCommentForm
 from hackercred.app.models import Hacker, Link, Cred
 
 def index(request):
@@ -23,7 +23,8 @@ def view_user(request, id):
     return render_to_response("view_user.html", {'viewed_user': viewed_user, 
                                                  'comments' : comments, 
                                                  'projects' : projects,
-                                                 'own_profile' : viewed_user == request.user},
+                                                 'own_profile' : viewed_user == request.user,
+                                                 'add_comment_form' : PartialCommentForm(initial={'type' : "COMMENT", 'user' : viewed_user})},
                               context_instance=RequestContext(request))
 
 @login_required
@@ -38,7 +39,21 @@ def edit_profile(request):
                                                  'add_link_form' : PartialLinkForm(),
                                                  'add_project_form' : PartialProjectForm(initial={'type' : "PROJECT", 'user' : user})},
                               context_instance=RequestContext(request))
-   
+
+@login_required
+def create_comment(request):
+    if request.method == "POST":
+        form = PartialProjectForm(request.POST)
+        if form.is_valid():
+            data = form.clean()
+            comment = Cred()
+            comment.type = "COMMENT"
+            comment.user = data['user']
+            comment.added_by = request.user
+            comment.text = data['text']
+            comment.save()
+            return HttpResponseRedirect(reverse(view_user, args=[data['user'].id]))
+        
 @login_required
 def create_project(request):
     if request.method == "POST":

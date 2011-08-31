@@ -25,6 +25,7 @@ urlpatterns = patterns('',
     (r'^link/(?P<id>[0-9]+)/$', 'app.views.delete_link'),
     (r'^project/$', 'app.views.create_project'),
     (r'^project/(?P<id>[0-9]+)/$', 'app.views.delete_project'),
+    (r'^comment/$', 'app.views.create_comment'),
 )
 
 if settings.DEBUG:
