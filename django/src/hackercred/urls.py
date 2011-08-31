@@ -20,6 +20,11 @@ urlpatterns = patterns('',
     (r'^login/$', 'django.contrib.auth.views.login'),
     (r'^register/$', 'app.views.register'),
     (r'^user/(?P<id>[0-9]+)/$', 'app.views.view_user'),
+    (r'^profile/$', 'app.views.edit_profile'),
+    (r'^link/$', 'app.views.create_link'),
+    (r'^link/(?P<id>[0-9]+)/$', 'app.views.delete_link'),
+    (r'^project/$', 'app.views.create_project'),
+    (r'^project/(?P<id>[0-9]+)/$', 'app.views.delete_project'),
 )
 
 if settings.DEBUG:

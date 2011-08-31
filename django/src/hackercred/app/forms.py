@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.core import validators
+from hackercred.app.models import Link, Cred
  
 def isValidUsername(field_data):
     try:
@@ -42,4 +43,36 @@ class RegistrationForm(forms.Form):
                                      password=self.cleaned_data['password1'])
         u.save()
         return u
-    
+
+class PartialLinkForm(forms.ModelForm):
+    class Meta:
+        model = Link
+        fields = ('type', 'url')
+        exclude = ('user',)
+        
+class PartialProjectForm(forms.ModelForm):
+    class Meta:
+        model = Cred
+        fields = ('project_name', 'external_url', 'text', 'user', 'type')
+        exclude = ('added_by')
+        widgets = {'user': forms.HiddenInput(), 'type' : forms.HiddenInput()}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

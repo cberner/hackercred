@@ -5,8 +5,23 @@
 	<img src="/static/no_profile_pic.png" />
 	<ul>
 		{% for link in viewed_user.links.all %}
-			<li><a href='{{link.url}}'>{{link.display_type}}</a></li>
+			<li>
+				<a href='{{link.url}}'>{{link.display_type}}</a>
+				{% if edit_mode %}
+					<form action="{% url app.views.delete_link link.id %}" method="POST">
+						{% csrf_token %}
+						<input type='submit' value="Delete">
+					</form>
+				{% endif %}
+			</li>
 		{% endfor %}
+		{% if edit_mode %}
+			<form action="{% url app.views.create_link %}" method="POST">
+				{% csrf_token %}
+				{{add_link_form.as_p}}
+				<input type='submit' value="Add">
+			</form>
+		{% endif %}
 	</ul>
 </div>
 <div id="main">
@@ -29,10 +44,23 @@
 			{% for cred in projects %}
 				<div class="cred">
 					<div><a href="{{cred.external_url}}">{{cred.project_name}}</a></div>
+					{% if edit_mode %}
+						<form action="{% url app.views.delete_project cred.id %}" method="POST">
+							{% csrf_token %}
+							<input type='submit' value="Delete">
+						</form>
+					{% endif %}
 					<div>{{cred.text}}</div>
 					<div>added by {{cred.added_by.get_full_name}} on {{cred.created_at|date:"M j, Y"}}</div>
 				</div>
 			{% endfor %}
+			{% if edit_mode %}
+				<form action="{% url app.views.create_project %}" method="POST">
+					{% csrf_token %}
+					{{add_project_form.as_p}}
+					<input type='submit' value="Add">
+				</form>
+			{% endif %}
 		</div>
 	</div>
 </div>

@@ -1,12 +1,15 @@
 from django.contrib.auth import logout as django_logout, login as django_login, \
     authenticate
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.core.exceptions import ObjectDoesNotExist
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.template.context import RequestContext
-from hackercred.app.forms import RegistrationForm
-from hackercred.app.models import Hacker
+from hackercred.app.forms import RegistrationForm, PartialLinkForm, \
+    PartialProjectForm
+from hackercred.app.models import Hacker, Link, Cred
 
 def index(request):
     users = Hacker.objects.all()
@@ -22,6 +25,72 @@ def view_user(request, id):
                                                  'projects' : projects},
                               context_instance=RequestContext(request))
 
+@login_required
+def edit_profile(request):
+    user = request.user
+    comments = user.creds.filter(type="COMMENT")
+    projects = user.creds.filter(type="PROJECT")
+    return render_to_response("view_user.html", {'viewed_user': user, 
+                                                 'comments' : comments, 
+                                                 'projects' : projects,
+                                                 'edit_mode' : True,
+                                                 'add_link_form' : PartialLinkForm(),
+                                                 'add_project_form' : PartialProjectForm(initial={'type' : "PROJECT", 'user' : user})},
+                              context_instance=RequestContext(request))
+   
+@login_required
+def create_project(request):
+    if request.method == "POST":
+        form = PartialProjectForm(request.POST)
+        if form.is_valid():
+            data = form.clean()
+            project = Cred()
+            project.type = "PROJECT"
+            project.user = data['user']
+            project.external_url = data['external_url']
+            project.added_by = request.user
+            project.text = data['text']
+            project.project_name = data['project_name']
+            project.save()
+            return HttpResponseRedirect(reverse(edit_profile))
+
+@login_required
+def delete_project(request, id):
+    #It would be nice if this could be DELETE, but that didn't seem to work
+    if request.method == "POST":
+        try:
+            project = Cred.objects.get(id=id)
+            if project.user == request.user and project.type == "PROJECT":
+                project.delete()
+        except ObjectDoesNotExist:
+            pass
+        return HttpResponseRedirect(reverse(edit_profile))
+    
+@login_required
+def create_link(request):
+    if request.method == "POST":
+        form = PartialLinkForm(request.POST)
+        if form.is_valid():
+            data = form.clean()
+            link = Link()
+            link.user = request.user
+            link.url = data['url']
+            link.type = data['type']
+            link.save()
+            return HttpResponseRedirect(reverse(edit_profile))
+
+@login_required
+def delete_link(request, id):
+    #It would be nice if this could be DELETE, but that didn't seem to work
+    if request.method == "POST":
+        try:
+            link = Link.objects.get(id=id)
+            if link.user == request.user:
+                link.delete()
+        except ObjectDoesNotExist:
+            pass
+        return HttpResponseRedirect(reverse(edit_profile))
+    
 def logout(request):
     django_logout(request)
     return HttpResponseRedirect(reverse(index))
