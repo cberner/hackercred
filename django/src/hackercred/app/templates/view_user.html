@@ -26,7 +26,11 @@
 </div>
 <div id="main">
 	<div id="basic-info">
-		<p>{{viewed_user.get_full_name}}</p>
+		<p>{{viewed_user.get_full_name}}
+			{% if own_profile and not edit_mode %}
+				<a href="{% url app.views.edit_profile %}">Edit</a>
+			{% endif %}
+		</p>
 	</div>
 	<div>
 		<div id="creds" class="left">

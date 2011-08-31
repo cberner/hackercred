@@ -22,7 +22,8 @@ def view_user(request, id):
     projects = viewed_user.creds.filter(type="PROJECT")
     return render_to_response("view_user.html", {'viewed_user': viewed_user, 
                                                  'comments' : comments, 
-                                                 'projects' : projects},
+                                                 'projects' : projects,
+                                                 'own_profile' : viewed_user == request.user},
                               context_instance=RequestContext(request))
 
 @login_required
