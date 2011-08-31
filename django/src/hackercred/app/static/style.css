@@ -58,6 +58,18 @@
 	margin: 10px auto 10px auto;
 }
 
+#top-users table {
+	width: 50%;
+}
+
+#top-users th {
+	background-color: gray;
+}
+
+#top-users td {
+	background-color: silver;
+}
+
 .cred {
 	margin: 4px 4px 8px 4px;
 	width: 393px;

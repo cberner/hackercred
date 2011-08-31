@@ -5,8 +5,15 @@
 <div id="top-users">
 	<h3>Top Hackers</h3>
 	<table>
+		<tr>
+			<th>Name</th><th># Projects</th><th>Member since</th>
+		</tr>
 		{% for user in users %}
-			<tr><td><a href="{% url app.views.view_user user.id %}">{{user.get_full_name}}</a></td></tr>
+			<tr>
+				<td><a href="{% url app.views.view_user user.id %}">{{user.get_full_name}}</a></td>
+				<td>{{user.projects.count}}</td>
+				<td>{{user.date_joined|date:"M j, Y"}}</td>
+			</tr>
 		{% endfor %}
 	</table>
 </div>

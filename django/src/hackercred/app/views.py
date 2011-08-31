@@ -6,9 +6,10 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.template.context import RequestContext
 from hackercred.app.forms import RegistrationForm
+from hackercred.app.models import Hacker
 
 def index(request):
-    users = User.objects.all()
+    users = Hacker.objects.all()
     return render_to_response("index.html", {'users' : users}, 
                               context_instance=RequestContext(request))
 

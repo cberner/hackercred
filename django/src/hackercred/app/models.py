@@ -1,6 +1,13 @@
 from django.contrib.auth.models import User
 from django.db import models
 
+class Hacker(User):
+    def projects(self):
+        return self.creds.filter(type="PROJECT")
+    
+    class Meta:
+        proxy = True
+
 class Cred(models.Model):
     TYPES = (("PROJECT", "Project"), ("COMMENT", "Comment"))
     text = models.TextField()
