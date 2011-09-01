@@ -14,6 +14,20 @@
 
 #logo {
 	float: left;
+	padding: 0px 0px 0px 20px;
+	margin: 0 0 -5px 0;
+}
+
+#logo a {
+	letter-spacing: -1px;
+	text-shadow: gray -1px 1px 2px;
+	font-family: Georgia, "Times New Roman", Times, serif;
+	font-size: 48px;
+	text-decoration: none;
+	color: #222;
+	margin: 0;
+	padding: 0;
+	line-height: 48px;
 }
 
 #login {

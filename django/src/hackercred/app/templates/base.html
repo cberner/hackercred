@@ -12,9 +12,9 @@
 	<body>
 		<div id="headerbg">
 			<div id="header">
-				<div id="logo">
+				<span id="logo">
 					<a href ="{% url app.views.index %}">HackerCred</a>
-				</div>
+				</span>
 				<div id="login">
 					{% if user.is_authenticated %} <a href='{% url app.views.view_user user.id %}'>{{user.username}}</a> (<a href='{% url app.views.logout %}'>logout</a>)
 					{% else %} <a href='{% url django.contrib.auth.views.login %}'>login</a>
