@@ -3,22 +3,51 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 	<head>
 		<title>{%block title%}HackerCred{%endblock%}</title>
+		<link rel="stylesheet" href="http://twitter.github.com/bootstrap/assets/css/bootstrap-1.1.1.min.css">
 		<link rel="stylesheet" href="/static/style.css" />
+		<script type="text/javascript" 
+		  src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js">
+		</script>
+		<script type="text/javascript" src="/static/javascript.js">
+		</script>
 		{% block head_include %}
 		{% endblock %}
 		{% if not debug %} <!-- google analytics here -->
 		{% endif %}
 	</head>
 	<body>
-		<div id="headerbg">
-			<div id="header">
-				<span id="logo">
-					<a href ="{% url app.views.index %}">HackerCred</a>
-				</span>
-				<div id="login">
-					{% if user.is_authenticated %} <a href='{% url app.views.view_user user.id %}'>{{user.username}}</a> (<a href='{% url app.views.logout %}'>logout</a>)
-					{% else %} <a href='{% url django.contrib.auth.views.login %}'>login</a>
-					{% endif %}
+		<div class="topbar-wrapper" style="z-index: 5;">
+			<div class="topbar">
+				<div class="fill">
+					<div class="container">
+						<h3><a href="{% url app.views.index %}">HackerCred</a></h3>
+						<ul>
+							<li><a href="{% url app.views.index %}">Home</a></li>
+						</ul>
+						<ul class="nav secondary-nav">
+							<li class="menu">
+								<a href="#" class="menu">Account</a>
+								<ul class="menu-dropdown">
+									{% if user.is_authenticated %}
+										<li>
+											<a href='{% url app.views.view_user user.id %}'>{{user.username}}</a>
+										</li>
+										<li class="divider"></li>
+										<li>
+											<a href="{% url app.views.view_user user.id %}">Profile</a>
+										</li>
+										<li>
+											<a href='{% url app.views.logout %}'>Logout</a>
+										</li>
+									{% else %} 
+									<li>
+										<a href='{% url django.contrib.auth.views.login %}'>Login</a>
+									</li>
+									{% endif %}
+								</ul>
+							</li>
+						</ul>
+					</div>
 				</div>
 			</div>
 		</div>

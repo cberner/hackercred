@@ -1,38 +1,4 @@
-#headerbg {
-	background-color: gray;
-	min-width: 100%;
-	min-height: 50px;
-	margin-left: 0px;
-	margin-right: 0px;
-}
 
-#header {
-	width: 960px;
-	margin-left: auto;
-	margin-right: auto;
-}
-
-#logo {
-	float: left;
-	padding: 0px 0px 0px 20px;
-	margin: 0 0 -5px 0;
-}
-
-#logo a {
-	letter-spacing: -1px;
-	text-shadow: gray -1px 1px 2px;
-	font-family: Georgia, "Times New Roman", Times, serif;
-	font-size: 48px;
-	text-decoration: none;
-	color: #222;
-	margin: 0;
-	padding: 0;
-	line-height: 48px;
-}
-
-#login {
-	float: right;
-}
 
 #content {
 	width: 960px;
@@ -72,19 +38,6 @@
 	margin: 10px auto 10px auto;
 }
 
-#top-users table {
-	width: 50%;
-}
-
-#top-users th
-{
-	background-color: gray;
-}
-
-#top-users td {
-	background-color: silver;
-}
-
 .cred {
 	margin: 4px 4px 8px 4px;
 	width: 393px;
@@ -104,6 +57,7 @@
 }
 
 body {
+	padding-top: 40px;
 	margin: 0px;
 	height: 100%;
 	background-color: #FCFCFC;

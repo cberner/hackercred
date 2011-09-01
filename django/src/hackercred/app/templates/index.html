@@ -2,19 +2,24 @@
 {% block content %}
 <a href="{% url app.views.register %}"><img id="signup-button" src="static/signup_button.jpg" /></a>
 
-<div id="top-users">
+<div>
 	<h3>Top Hackers</h3>
 	<table>
-		<tr>
-			<th>Name</th><th># Projects</th><th>Member since</th>
-		</tr>
-		{% for user in users %}
+		<thead>
 			<tr>
-				<td><a href="{% url app.views.view_user user.id %}">{{user.get_full_name}}</a></td>
-				<td>{{user.projects.count}}</td>
-				<td>{{user.date_joined|date:"M j, Y"}}</td>
+				<th>#</th><th>Name</th><th># Projects</th><th>Member since</th>
 			</tr>
-		{% endfor %}
+		</thead>
+		<tbody>
+			{% for user in users %}
+				<tr>
+					<td>{{ forloop.counter }}</td>
+					<td><a href="{% url app.views.view_user user.id %}">{{user.get_full_name}}</a></td>
+					<td>{{user.projects.count}}</td>
+					<td>{{user.date_joined|date:"M j, Y"}}</td>
+				</tr>
+			{% endfor %}
+		</tbody>
 	</table>
 </div>
 {% endblock %}
