@@ -21,9 +21,9 @@ class RegistrationForm(forms.Form):
     def save(self):
         u = User.objects.create_user(username=self.cleaned_data['email'],
                                      email=self.cleaned_data['email'],
-                                     password=self.cleaned_data['password'],
-                                     first_name=self.cleaned_data['first_name'],
-                                     last_name=self.cleaned_data['last_name'])
+                                     password=self.cleaned_data['password'])
+        u.first_name = self.cleaned_data['first_name']
+        u.last_name = self.cleaned_data['last_name']
         u.save()
         return u
 

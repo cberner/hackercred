@@ -43,6 +43,11 @@
 	<div>
 		<div id="creds" class="left">
 			<h4>Newsfeed</h4>
+			{% if comments.count == 0 %}
+				<p>
+					No activity yet.
+				</p>
+			{% endif %}
 			{% for cred in comments %}
 				<div class="cred">
 					<div><a href="{% url app.views.view_user cred.added_by.id %}">{{cred.added_by.get_full_name}}</a></div>
@@ -67,6 +72,11 @@
 		</div>
 		<div id="projects" class="right">
 			<h4>Projects</h4>
+			{% if projects.count == 0 %}
+				<p>
+					{{viewed_user.get_full_name}} has not listed any projects yet.
+				</p>
+			{% endif %}
 			{% for cred in projects %}
 				<div class="project deleteable">
 					<div class="header">

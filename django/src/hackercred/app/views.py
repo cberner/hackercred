@@ -118,7 +118,7 @@ def register(request):
         if form.is_valid(): # All validation rules pass
             # Process the data in form.cleaned_data
             form.save()
-            user = authenticate(username=form.cleaned_data['username'], password=form.cleaned_data['password1'])
+            user = authenticate(username=form.cleaned_data['email'], password=form.cleaned_data['password'])
             django_login(request, user)
             return HttpResponseRedirect(reverse(index)) # Redirect after POST
     else:
