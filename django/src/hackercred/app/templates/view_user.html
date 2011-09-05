@@ -5,22 +5,30 @@
 	<img src="/static/no_profile_pic.png" />
 	<ul>
 		{% for link in viewed_user.links.all %}
-			<li>
-				<a href='{{link.url}}'>{{link.display_type}}</a>
+			<li class="deleteable">
+				<a href='{{link.url}}' style="display: inline;">{{link.display_type}}</a>
 				{% if edit_mode %}
-					<form action="{% url app.views.delete_link link.id %}" method="POST">
-						{% csrf_token %}
-						<input type='submit' value="Delete">
-					</form>
+					<a href="#{% url app.views.delete_link link.id %}" class="delete" style="display: inline;">&#x00D7;</a>
 				{% endif %}
 			</li>
 		{% endfor %}
 		{% if edit_mode %}
-			<form action="{% url app.views.create_link %}" method="POST">
-				{% csrf_token %}
-				{{add_link_form.as_p}}
-				<input type='submit' value="Add">
-			</form>
+			<a id="launch-add-link" class="launcher btn primary" style="margin-top: 10px;" href="#">New Link</a>
+			<div id="add-link" class="modal" style="display: none; position: relative; top: auto; left: auto; margin: 0 auto; z-index: 1">
+				<div class="modal-header">
+					<h3>Add Link</h3>
+					<a href="#" class="close">&#x00D7;</a>
+				</div>
+				<form action="{% url app.views.create_link %}" method="POST">
+					<div class="modal-body">
+						{% csrf_token %}
+						{{add_link_form.as_p}}
+					</div>
+					<div class="modal-footer">
+						<input type='submit' value="Add" class="btn primary">
+					</div>
+				</form>
+			</div>
 		{% endif %}
 	</ul>
 </div>
@@ -53,24 +61,36 @@
 		<div id="projects" class="right">
 			<p>Projects</p>
 			{% for cred in projects %}
-				<div class="cred">
-					<div><a href="{{cred.external_url}}">{{cred.project_name}}</a></div>
+				<div class="cred deleteable">
 					{% if edit_mode %}
-						<form action="{% url app.views.delete_project cred.id %}" method="POST">
-							{% csrf_token %}
-							<input type='submit' value="Delete">
-						</form>
+						<div style="float: right;">
+							<a href="#{% url app.views.delete_project cred.id %}" class="delete">&#x00D7;</a>
+						</div>
 					{% endif %}
+					<div><a href="{{cred.external_url}}">{{cred.project_name}}</a></div>
 					<div>{{cred.text}}</div>
 					<div>added by {{cred.added_by.get_full_name}} on {{cred.created_at|date:"M j, Y"}}</div>
 				</div>
 			{% endfor %}
 			{% if edit_mode %}
-				<form action="{% url app.views.create_project %}" method="POST">
-					{% csrf_token %}
-					{{add_project_form.as_p}}
-					<input type='submit' value="Add">
-				</form>
+				<a id="launch-add-project" class="launcher btn primary" style="margin-top: 10px;" href="#">Add Project</a>
+				<div style="position: fixed; top: 125px; left: 50%;">
+					<div id="add-project" class="modal" style="display: none; position: absolute; top: 0px; left: -281px; margin: 0 auto; z-index: 1">
+						<div class="modal-header">
+							<h3>Add Project</h3>
+							<a href="#" class="close">&#x00D7;</a>
+						</div>
+						<form action="{% url app.views.create_project %}" method="POST">
+							<div class="modal-body">
+								{% csrf_token %}
+								{{add_project_form.as_p}}
+							</div>
+							<div class="modal-footer">
+								<input type='submit' value="Add" class="btn primary">
+							</div>
+						</form>
+					</div>
+				</div>
 			{% endif %}
 		</div>
 	</div>

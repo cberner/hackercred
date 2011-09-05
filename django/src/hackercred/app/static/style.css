@@ -16,7 +16,7 @@
 }
 
 #sidebar ul {
-	padding: 20px;
+	padding: 10px;
 }
 
 #main {
@@ -36,6 +36,10 @@
 #signup-button {
 	display: block;
 	margin: 10px auto 10px auto;
+}
+
+.hidden {
+	display: none;
 }
 
 .cred {
