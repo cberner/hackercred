@@ -10,12 +10,29 @@
 		</script>
 		<script type="text/javascript" src="/static/javascript.js">
 		</script>
+		<meta name="google-site-verification" content="Yx6NpB-V_sn8S95RrWg8P1SOfyFTsfoVFPNJmmueXvQ" />
 		{% block head_include %}
 		{% endblock %}
 		{% if not debug %} <!-- google analytics here -->
 		{% endif %}
 	</head>
 	<body>
+		<!-- Feedback modal -->
+		<div style="position: fixed; top: 125px; left: 50%;">
+			<div id="feedback" class="modal" style="display: none; position: absolute; top: 0px; left: -281px; margin: 0 auto; z-index: 1">
+				<div class="modal-header">
+					<h3>Feedback</h3>
+					<a href="#" class="close">&#x00D7;</a>
+				</div>
+				<div class="modal-body">
+					<p>Please send feedback to: <a href="mailto:feedback@hackercred.com?subject=Feedback">feedback@hackercred.com</a></p>
+				</div>
+				<div class="modal-footer">
+					<a href="#" class="btn secondary">Ok</a>
+				</div>
+			</div>
+		</div>
+		
 		<div class="topbar-wrapper" style="z-index: 5;">
 			<div class="topbar">
 				<div class="fill">
@@ -23,6 +40,8 @@
 						<h3><a href="{% url app.views.index %}">HackerCred</a></h3>
 						<ul>
 							<li><a href="{% url app.views.index %}">Home</a></li>
+							<li><a href="{% url app.views.view_user user.id %}">Profile</a></li>
+							<li><a href="#" id="launch-feedback" class="launcher">Feedback</a></li>
 						</ul>
 						<ul class="nav secondary-nav">
 							<li class="menu">

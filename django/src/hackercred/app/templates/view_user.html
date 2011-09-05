@@ -13,7 +13,7 @@
 			</li>
 		{% endfor %}
 		{% if edit_mode %}
-			<a id="launch-add-link" class="launcher btn primary" style="margin-top: 10px;" href="#">New Link</a>
+			<a id="launch-add-link" class="launcher btn primary hideable" style="margin-top: 10px;" href="#">New Link</a>
 			<div id="add-link" class="modal" style="display: none; position: relative; top: auto; left: auto; margin: 0 auto; z-index: 1">
 				<div class="modal-header">
 					<h3>Add Link</h3>
@@ -84,7 +84,7 @@
 				</div>
 			{% endfor %}
 			{% if edit_mode %}
-				<a id="launch-add-project" class="launcher btn primary" style="margin-top: 10px;" href="#">Add Project</a>
+				<a id="launch-add-project" class="launcher btn primary hideable" style="margin-top: 10px;" href="#">Add Project</a>
 				<div style="position: fixed; top: 125px; left: 50%;">
 					<div id="add-project" class="modal" style="display: none; position: absolute; top: 0px; left: -281px; margin: 0 auto; z-index: 1">
 						<div class="modal-header">

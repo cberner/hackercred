@@ -39,7 +39,13 @@ $(document).ready(function() {
 		$.post(url);
 	});
 	
-	$("input.btn").submit(function(e) {
+	$("div.modal input.btn").submit(function(e) {
+		var p = $(this).parents("div.modal");
+		hideModal(p, 200);
+		return false;
+	});
+	
+	$("div.modal a.btn").click(function(e) {
 		var p = $(this).parents("div.modal");
 		hideModal(p, 200);
 		return false;
@@ -49,7 +55,9 @@ $(document).ready(function() {
 	$("a.launcher").click(function(e) {
 		var myid = $(this).attr('id');
 		$("#" + myid.replace("launch-", "")).show(200);
-		$(this).hide()
+		if ($(this).hasClass('hideable')) {
+			$(this).hide();
+		}
 		return false
 	});
 });
