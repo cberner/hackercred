@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
+from django.db.models.signals import post_save
 
 class Hacker(User):
     def projects(self):
@@ -36,3 +37,20 @@ class Link(models.Model):
             if t == self.type:
                 return d
         assert False
+        
+class UserProfile(models.Model):
+    user = models.OneToOneField(User)
+    
+    job_title = models.CharField(max_length=128, blank=True)
+    employer = models.CharField(max_length=128, blank=True)
+    
+    def __unicode__(self):
+        return self.user.username
+    
+def create_user_profile(sender, instance, **kwargs):
+    if 'created' in kwargs and kwargs['created']:
+        profile = UserProfile()
+        profile.user = instance
+        profile.save()
+    
+post_save.connect(create_user_profile, User, dispatch_uid="app.models")

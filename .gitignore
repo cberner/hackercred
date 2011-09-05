@@ -1,3 +1,4 @@
 secretkey.py
 passwords.py
+.settings/
 *.pyc
