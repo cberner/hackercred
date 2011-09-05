@@ -43,6 +43,27 @@
 						</tr>
 					</table>
 				</form>
+			{% else %}
+				<h4 style="line-height: 20px;">Now that you've registered:</h4>
+				<ul>
+					<li><a href="{% url app.views.edit_profile %}">Complete your profile</a></li>
+					<li><a href="#" id="launch-invite" class="launcher">Invite friends</a></li>
+				</ul>
+				<!-- Invite modal -->
+				<div style="position: fixed; top: 125px; left: 50%;">
+					<div id="invite" class="modal" style="display: none; position: absolute; top: 0px; left: -281px; margin: 0 auto; z-index: 1">
+						<div class="modal-header">
+							<h3>Invite</h3>
+							<a href="#" class="close">&#x00D7;</a>
+						</div>
+						<div class="modal-body">
+							<p>Just send your friends a link to <a href="http://hackercred.com">http://hackercred.com</a></p>
+						</div>
+						<div class="modal-footer">
+							<a href="#" class="btn secondary">Ok</a>
+						</div>
+					</div>
+				</div>
 			{% endif %}
 		</div>
 	</div>
