@@ -52,7 +52,9 @@
 						<h3><a href="{% url app.views.index %}">HackerCred</a></h3>
 						<ul>
 							<li><a href="{% url app.views.index %}">Home</a></li>
-							<li><a href="{% url app.views.view_user user.id %}">Profile</a></li>
+							{% if user.is_authenticated %}
+								<li><a href="{% url app.views.view_user user.id %}">Profile</a></li>
+							{% endif %}
 							<li><a href="#" id="launch-feedback" class="launcher">Feedback</a></li>
 						</ul>
 						<ul class="nav secondary-nav">
