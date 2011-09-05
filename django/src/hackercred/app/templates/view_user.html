@@ -34,42 +34,53 @@
 </div>
 <div id="main">
 	<div id="basic-info">
-		<p>{{viewed_user.get_full_name}}
+		<h5>{{viewed_user.get_full_name}}
 			{% if own_profile and not edit_mode %}
 				<a href="{% url app.views.edit_profile %}">Edit</a>
 			{% endif %}
-		</p>
+		</h5>
 	</div>
 	<div>
 		<div id="creds" class="left">
-			<p>Newsfeed</p>
+			<h4>Newsfeed</h4>
 			{% for cred in comments %}
 				<div class="cred">
-					<div>{{cred.added_by.get_full_name}} said</div>
-					<div>{{cred.text}}</div>
-					<div>on {{cred.created_at|date:"M j, Y"}}</div>
+					<div><a href="{% url app.views.view_user cred.added_by.id %}">{{cred.added_by.get_full_name}}</a></div>
+					<div class="comment-text">{{cred.text}}</div>
+					<div class="date">on {{cred.created_at|date:"M j, Y"}}</div>
 				</div>
 			{% endfor %}
 			{% if not edit_mode %}
 				<form action="{% url app.views.create_comment %}" method="POST">
 					{% csrf_token %}
-					{{add_comment_form.as_p}}
-					<input type='submit' value="Comment">
+					<div>
+						{% for field in add_comment_form %}
+							{{field.errors}}
+							{{field}}
+						{% endfor %}
+					</div>
+					<div style="float: right; margin-top: 4px;">
+						<input type='submit' value="Comment">
+					</div>
 				</form>
 			{% endif %}
 		</div>
 		<div id="projects" class="right">
-			<p>Projects</p>
+			<h4>Projects</h4>
 			{% for cred in projects %}
-				<div class="cred deleteable">
-					{% if edit_mode %}
-						<div style="float: right;">
-							<a href="#{% url app.views.delete_project cred.id %}" class="delete">&#x00D7;</a>
-						</div>
-					{% endif %}
-					<div><a href="{{cred.external_url}}">{{cred.project_name}}</a></div>
-					<div>{{cred.text}}</div>
-					<div>added by {{cred.added_by.get_full_name}} on {{cred.created_at|date:"M j, Y"}}</div>
+				<div class="project deleteable">
+					<div class="header">
+						{% if edit_mode %}
+							<div style="float: right;">
+								<a href="#{% url app.views.delete_project cred.id %}" class="delete">&#x00D7;</a>
+							</div>
+						{% endif %}
+						<div><a href="{{cred.external_url}}">{{cred.project_name}}</a></div>
+					</div>
+					<div class="body">
+						<p>{{cred.text}}</p>
+						<div class="date">added on {{cred.created_at|date:"M j, Y"}}</div>
+					</div>
 				</div>
 			{% endfor %}
 			{% if edit_mode %}
