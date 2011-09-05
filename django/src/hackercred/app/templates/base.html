@@ -57,11 +57,22 @@
 							{% endif %}
 							<li><a href="#" id="launch-feedback" class="launcher">Feedback</a></li>
 						</ul>
-						<ul class="nav secondary-nav">
-							<li class="menu">
-								<a href="#" class="menu">Account</a>
-								<ul class="menu-dropdown">
-									{% if user.is_authenticated %}
+							{% if not user.is_authenticated %}
+								<form style="float: right;" action="{% url django.contrib.auth.views.login %}" method="POST">
+									{% csrf_token %}
+									<ul>
+										<li><input type="text" placeholder="Email" name="username" style="width:150px; margin-right: 5px;"></li>
+										<li><input type="password" placeholder="Password" name="password" style="width: 100px; margin-right: 5px;"></li>
+										<li><input type="submit" id="login-button" value="Log In" class="btn primary" style="width: auto; height: 28px;"/></li>
+									</ul>
+									<input type="hidden" name="next" value="/" />
+								</form>
+							{% endif %}
+						{% if user.is_authenticated %}
+							<ul class="nav secondary-nav">
+								<li class="menu">
+									<a href="#" class="menu">Account</a>
+									<ul class="menu-dropdown">
 										<li>
 											<a href='{% url app.views.view_user user.id %}'>{{user.username}}</a>
 										</li>
@@ -72,14 +83,10 @@
 										<li>
 											<a href='{% url app.views.logout %}'>Logout</a>
 										</li>
-									{% else %} 
-									<li>
-										<a href='{% url django.contrib.auth.views.login %}'>Login</a>
-									</li>
-									{% endif %}
-								</ul>
-							</li>
-						</ul>
+									</ul>
+								</li>
+							</ul>
+						{% endif %}
 					</div>
 				</div>
 			</div>

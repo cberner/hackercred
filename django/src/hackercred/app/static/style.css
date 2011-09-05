@@ -92,6 +92,19 @@
 	padding: 3px;
 }
 
+/* Unfortunate hack because the nav bar has its own styling that conflicts with .btn.primary */
+#login-button.btn.primary:hover {
+	background-position:0 -15px;
+	color:#333;
+	text-decoration:none;
+	background-color:#0064cd;
+	background-repeat:repeat-x;
+	color:#fff;
+	text-shadow:0 -1px 0 rgba(0, 0, 0, 0.25);
+	border:1px solid #004b9a;
+	border-bottom-color:#003f81;
+}
+
 body {
 	padding-top: 40px;
 	margin: 0px;
