@@ -82,6 +82,16 @@
 	clear: right;
 }
 
+.registration label,input {
+	width: auto;
+	float: right;
+}
+
+.registration table td, table th {
+	border-bottom-width: 0;
+	padding: 3px;
+}
+
 body {
 	padding-top: 40px;
 	margin: 0px;

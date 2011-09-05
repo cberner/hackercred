@@ -13,7 +13,8 @@ from hackercred.app.models import Hacker, Link, Cred
 
 def index(request):
     users = Hacker.objects.all()
-    return render_to_response("index.html", {'users' : users}, 
+    return render_to_response("index.html", {'users' : users,
+                                             'registration_form' : RegistrationForm()}, 
                               context_instance=RequestContext(request))
 
 def view_user(request, id):
