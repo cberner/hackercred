@@ -60,7 +60,8 @@
 				<tbody>
 					{% for user in users %}
 						<tr>
-							<td><a href="{% url app.views.view_user user.id %}">{{user.get_full_name}}</a></td>
+							<td><a href="{% url app.views.view_user user.id %}">
+								{% if user.get_full_name %}{{user.get_full_name}}{% else %}{{user.username}}{% endif %}</a></td>
 							<td>{{user.projects.count}}</td>
 							<td>{{user.date_joined|date:"M j, Y"}}</td>
 						</tr>
