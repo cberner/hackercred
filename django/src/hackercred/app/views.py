@@ -75,6 +75,8 @@ def create_comment(request):
             comment.text = data['text']
             comment.save()
             return HttpResponseRedirect(reverse(view_user, args=[data['user'].id]))
+    else:
+        return HttpResponseRedirect(reverse(index))
         
 @login_required
 def create_project(request):
@@ -91,6 +93,8 @@ def create_project(request):
             project.project_name = data['project_name']
             project.save()
             return HttpResponseRedirect(reverse(edit_profile))
+    else:
+        return HttpResponseRedirect(reverse(index))
 
 @login_required
 def delete_project(request, id):
@@ -103,6 +107,8 @@ def delete_project(request, id):
         except ObjectDoesNotExist:
             pass
         return HttpResponseRedirect(reverse(edit_profile))
+    else:
+        return HttpResponseRedirect(reverse(index))
     
 @login_required
 def create_link(request):
@@ -116,6 +122,8 @@ def create_link(request):
             link.type = data['type']
             link.save()
             return HttpResponseRedirect(reverse(edit_profile))
+    else:
+        return HttpResponseRedirect(reverse(index))
 
 @login_required
 def delete_link(request, id):
@@ -128,6 +136,8 @@ def delete_link(request, id):
         except ObjectDoesNotExist:
             pass
         return HttpResponseRedirect(reverse(edit_profile))
+    else:
+        return HttpResponseRedirect(reverse(index))
     
 def logout(request):
     django_logout(request)
