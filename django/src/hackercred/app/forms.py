@@ -15,7 +15,7 @@ class RegistrationForm(forms.Form):
                 regex="^[a-zA-Z\-']*$", message=u"Only letters, hyphens, and apostrophes are allowed", code="custom")])
     last_name = forms.CharField(min_length=1, max_length=30, validators=[validators.RegexValidator(
                 regex="^[a-zA-Z\-']*$", message=u"Only letters, hyphens, and apostrophes are allowed", code="custom")])
-    email = forms.EmailField(validators=[uniqueEmail])
+    email = forms.EmailField(validators=[uniqueEmail], max_length=30)
     password = forms.CharField(label="Password", min_length=1, max_length=30, widget=forms.PasswordInput)
     
     def save(self):

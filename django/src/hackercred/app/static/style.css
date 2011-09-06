@@ -45,6 +45,7 @@
 
 .comment-text {
 	color: black;
+	width: auto;
 }
 
 .project {
@@ -72,11 +73,12 @@
 
 .date {
 	font-size: 10px;
+	width: auto;
 }
 
 .cred {
 	margin: 4px 0px 8px 0px;
-	width: 393px;
+	width: 383px;
 	padding: 3px;
 	border-bottom: 1px solid #E2E2E2;
 }
