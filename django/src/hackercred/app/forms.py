@@ -51,7 +51,7 @@ class PartialCommentForm(forms.ModelForm):
         fields = ('text', 'user', 'type')
         exclude = ('project_name', 'external_url')
         widgets = {'user': forms.HiddenInput(), 'type' : forms.HiddenInput(), 
-                   'text' : forms.Textarea(attrs={'cols': 60, 'rows':5})}
+                   'text' : forms.Textarea(attrs={'cols': 10, 'rows':5})}
 
 
 

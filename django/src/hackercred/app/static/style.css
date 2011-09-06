@@ -1,5 +1,6 @@
 #sidebar {
 	height: 100%;
+	min-height: 600px;
 	width: 130px;
 	float: left;
 	border-right: 1px solid #AAA;
@@ -27,7 +28,10 @@
 }
 
 #creds textarea {
-	width: 391px;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	border-width: 0;
 }
 
 #basic-info {
@@ -117,7 +121,6 @@
 body {
 	padding-top: 40px;
 	margin: 0px;
-	height: 100%;
 	background-color: #FCFCFC;
 }
 

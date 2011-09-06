@@ -78,7 +78,7 @@
 			{% if not edit_mode %}
 				<form action="{% url app.views.create_comment %}" method="POST">
 					{% csrf_token %}
-					<div>
+					<div style="border: 1px solid #CCC; border-radius: 3px;">
 						{% for field in add_comment_form %}
 							{{field.errors}}
 							{{field}}
