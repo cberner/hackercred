@@ -47,6 +47,12 @@ class UserProfile(models.Model):
     def __unicode__(self):
         return self.user.username
     
+    def employment_str(self):
+        if self.job_title:
+            return self.job_title + (" at %s" % self.employer if self.employer else "")
+        else:
+            return "employed at %s" % self.employer if self.employer else None
+    
 def create_user_profile(sender, instance, **kwargs):
     if 'created' in kwargs and kwargs['created']:
         profile = UserProfile()

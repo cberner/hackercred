@@ -2,10 +2,21 @@
 
 {% block content %}
 
-<form method="POST" action="{% url app.views.register %}">
-{% csrf_token %}
-{{form.as_p}}
-<input type="submit" value="register" />
-</form>
+<div style="padding-top: 20px;">
+	<h2>Create your profile</h2>
+	<form method="POST" action="{% url app.views.register %}" class="registration">
+	{% csrf_token %}
+	<table style="width: 265px;">
+		{{form.as_table}}
+		<tr>
+			<td></td>
+			<td>
+				<input type="submit" value="Create Profile" class="btn primary" style="float: right;"/>
+			</td>
+		</tr>
+	</table>
+	</form>
+</div>
+
 
 {% endblock %}

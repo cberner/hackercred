@@ -27,8 +27,12 @@ $(document).ready(function() {
 	
 	//Make modals closable, and show their launcher again
 	$("a.close").click(function(e) {
-		var p = $(this).parents("div.modal");
-		hideModal(p, 200);
+		var p = $(this).parents(".dismissable");
+		if (p.hasClass('modal')) {
+			hideModal(p, 200);
+		} else {
+			p.hide(200);
+		}
 	});
 	
 	$("a.delete").click(function(e) {

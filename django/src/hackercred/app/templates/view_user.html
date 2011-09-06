@@ -14,7 +14,7 @@
 		{% endfor %}
 		{% if edit_mode %}
 			<a id="launch-add-link" class="launcher btn primary hideable" style="margin-top: 10px;" href="#">New Link</a>
-			<div id="add-link" class="modal" style="display: none; position: relative; top: auto; left: auto; margin: 0 auto; z-index: 1">
+			<div id="add-link" class="modal dismissable" style="display: none; position: relative; top: auto; left: auto; margin: 0 auto; z-index: 1">
 				<div class="modal-header">
 					<h3>Add Link</h3>
 					<a href="#" class="close">&#x00D7;</a>
@@ -33,12 +33,32 @@
 	</ul>
 </div>
 <div id="main">
+	{% if alert_message %}
+		<div class="alert-message {{alert_message.type}} dismissable" style="margin: 10px 0 10px 0;">
+			<a href="#" class="close">&#x00D7;</a>
+			<p>{{alert_message.message}}</p>
+		</div>
+	{% endif %}
 	<div id="basic-info">
 		<h5>{{viewed_user.get_full_name}}
 			{% if own_profile and not edit_mode %}
 				<a href="{% url app.views.edit_profile %}">Edit</a>
 			{% endif %}
 		</h5>
+		<ul>
+			{% if edit_mode %}
+				<form action="{% url app.views.edit_profile %}" method="POST">
+					{% csrf_token %}
+				<li><input type="text" name="job_title" placeholder="Position" value="{{viewed_user.get_profile.job_title}}"> at 
+					<input type="text" name="employer" placeholder="Employer" value="{{viewed_user.get_profile.employer}}"></li>
+				<input type="submit" value="Save Profile" class="btn primary" style="margin-top: 10px;">
+				</form>
+			{% else %}
+				{% if viewed_user.get_profile.employment_str %}
+					<li>{{viewed_user.get_profile.employment_str}}</li>
+				{% endif %}
+			{% endif %}
+		</ul>
 	</div>
 	<div>
 		<div id="creds" class="left">
@@ -96,7 +116,7 @@
 			{% if edit_mode %}
 				<a id="launch-add-project" class="launcher btn primary hideable" style="margin-top: 10px;" href="#">Add Project</a>
 				<div style="position: fixed; top: 125px; left: 50%;">
-					<div id="add-project" class="modal" style="display: none; position: absolute; top: 0px; left: -281px; margin: 0 auto; z-index: 1">
+					<div id="add-project" class="modal dismissable" style="display: none; position: absolute; top: 0px; left: -281px; margin: 0 auto; z-index: 1">
 						<div class="modal-header">
 							<h3>Add Project</h3>
 							<a href="#" class="close">&#x00D7;</a>

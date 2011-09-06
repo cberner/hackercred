@@ -113,6 +113,7 @@ TEMPLATE_DIRS = (
 )
 
 LOGIN_REDIRECT_URL = '/'
+LOGIN_URL = '/login/'
 
 AUTH_PROFILE_MODULE = 'app.UserProfile'
 

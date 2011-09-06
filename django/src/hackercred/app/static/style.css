@@ -87,14 +87,18 @@
 	clear: right;
 }
 
-.registration label,input {
+.registration label, .registration input {
 	width: auto;
 	float: right;
 }
 
-.registration table td, table th {
+.registration table td, .registration table th {
 	border-bottom-width: 0;
 	padding: 3px;
+}
+
+#basic-info form input {
+	float: none;
 }
 
 /* Unfortunate hack because the nav bar has its own styling that conflicts with .btn.primary */

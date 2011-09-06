@@ -8,7 +8,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.template.context import RequestContext
 from hackercred.app.forms import RegistrationForm, PartialLinkForm, \
-    PartialProjectForm, PartialCommentForm
+    PartialProjectForm, PartialCommentForm, PartialProfileForm
 from hackercred.app.models import Hacker, Link, Cred
 
 def index(request):
@@ -31,12 +31,33 @@ def view_user(request, id):
 @login_required
 def edit_profile(request):
     user = request.user
+    profile = user.get_profile()
+    alert_message = {}
+
+    if request.method == 'POST': # If the form has been submitted...
+        form = PartialProfileForm(request.POST) # A form bound to the POST data
+        if form.is_valid(): # All validation rules pass
+            profile.employer = form.cleaned_data['employer']
+            profile.job_title = form.cleaned_data['job_title']
+            profile.save()
+            alert_message['type'] = "success"
+            alert_message['message'] = "Profile saved"
+    else:
+        initial = {}
+        if profile.employer:
+            initial['employer'] = profile.employer
+        if profile.job_title:
+            initial['job_title'] = profile.job_title
+        form = PartialProfileForm(initial=initial)
+
     comments = user.creds.filter(type="COMMENT")
     projects = user.creds.filter(type="PROJECT")
     return render_to_response("view_user.html", {'viewed_user': user, 
                                                  'comments' : comments, 
                                                  'projects' : projects,
                                                  'edit_mode' : True,
+                                                 'profile_form' : form,
+                                                 'alert_message' : alert_message,
                                                  'add_link_form' : PartialLinkForm(),
                                                  'add_project_form' : PartialProjectForm(initial={'type' : "PROJECT", 'user' : user})},
                               context_instance=RequestContext(request))

@@ -1,39 +1,20 @@
 {% extends "base.html" %}
 {% block content %}
-<div style="margin-top: 70px;">
-	<div class="row">
+<div style="margin-top: 40px;">
+	<div class="row" style="margin-bottom: 0;">
 		<div class="span9 columns">
 			<h2 style="line-height: 24px;">
 				Custom profiles for the hackers<br>&nbsp;of Silicon Valley. 
 			</h2>
 			<p style="padding-left: 10px;">Show off all the awesome projects you've worked on!</p>
-			<div style="margin-top: 90px;">			
-				<h3>Newest Members</h3>
-				<table>
-					<thead>
-						<tr>
-							<th>Name</th><th># Projects</th><th>Member since</th>
-						</tr>
-					</thead>
-					<tbody>
-						{% for user in users %}
-							<tr>
-								<td><a href="{% url app.views.view_user user.id %}">{{user.get_full_name}}</a></td>
-								<td>{{user.projects.count}}</td>
-								<td>{{user.date_joined|date:"M j, Y"}}</td>
-							</tr>
-						{% endfor %}
-					</tbody>
-				</table>
-			</div>
 		</div>
 		<div class="span6 columns offset1">
 			{% if not user.is_authenticated %}
 				<h3>Sign Up!</h3>
 				<p>It's free and simple.</p>
-				<form class="registration" method="POST" action="{% url app.views.register %}">
+				<form class="registration" method="POST" action="{% url app.views.register %}" style="margin-bottom: 0;">
 					{% csrf_token %}
-					<table style="width: 300px;">
+					<table style="width: 260px; margin-bottom: 0;">
 						{{registration_form.as_table}}
 						<tr>
 							<td></td>
@@ -51,7 +32,7 @@
 				</ul>
 				<!-- Invite modal -->
 				<div style="position: fixed; top: 125px; left: 50%;">
-					<div id="invite" class="modal" style="display: none; position: absolute; top: 0px; left: -281px; margin: 0 auto; z-index: 1">
+					<div id="invite" class="modal dismissable" style="display: none; position: absolute; top: 0px; left: -281px; margin: 0 auto; z-index: 1">
 						<div class="modal-header">
 							<h3>Invite</h3>
 							<a href="#" class="close">&#x00D7;</a>
@@ -65,6 +46,27 @@
 					</div>
 				</div>
 			{% endif %}
+		</div>
+	</div>
+	<div class="row">
+		<div class="span9 columns">			
+			<h3>Newest Members</h3>
+			<table>
+				<thead>
+					<tr>
+						<th>Name</th><th># Projects</th><th>Member since</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for user in users %}
+						<tr>
+							<td><a href="{% url app.views.view_user user.id %}">{{user.get_full_name}}</a></td>
+							<td>{{user.projects.count}}</td>
+							<td>{{user.date_joined|date:"M j, Y"}}</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
 		</div>
 	</div>
 </div>

@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.core import validators
-from hackercred.app.models import Link, Cred
+from hackercred.app.models import Link, Cred, UserProfile
  
 def uniqueEmail(field_data):
     try:
@@ -26,6 +26,11 @@ class RegistrationForm(forms.Form):
         u.last_name = self.cleaned_data['last_name']
         u.save()
         return u
+
+class PartialProfileForm(forms.ModelForm):
+    class Meta:
+        model = UserProfile
+        fields = ('job_title', 'employer')
 
 class PartialLinkForm(forms.ModelForm):
     class Meta:
