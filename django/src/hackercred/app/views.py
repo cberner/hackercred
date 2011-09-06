@@ -12,7 +12,7 @@ from hackercred.app.forms import RegistrationForm, PartialLinkForm, \
 from hackercred.app.models import Hacker, Link, Cred
 
 def index(request):
-    users = Hacker.objects.all()
+    users = Hacker.objects.all().order_by('-date_joined')
     return render_to_response("index.html", {'users' : users,
                                              'registration_form' : RegistrationForm()}, 
                               context_instance=RequestContext(request))
