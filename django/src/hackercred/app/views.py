@@ -10,6 +10,8 @@ from django.template.context import RequestContext
 from hackercred.app.forms import RegistrationForm, PartialLinkForm, \
     PartialProjectForm, PartialCommentForm, PartialProfileForm
 from hackercred.app.models import Hacker, Link, Cred
+import random
+import string
 
 def index(request):
     users = Hacker.objects.all().order_by('-date_joined')

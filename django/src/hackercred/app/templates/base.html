@@ -62,7 +62,7 @@
 								<form style="float: right;" action="{% url django.contrib.auth.views.login %}" method="POST">
 									{% csrf_token %}
 									<ul>
-										<li><input type="text" placeholder="Email" name="username" style="width:150px; margin-right: 5px;"></li>
+										<li><input type="text" placeholder="Email" name="email" style="width:150px; margin-right: 5px;"></li>
 										<li><input type="password" placeholder="Password" name="password" style="width: 100px; margin-right: 5px;"></li>
 										<li><input type="submit" id="login-button" value="Log In" class="btn primary" style="width: auto; height: 28px;"/></li>
 									</ul>

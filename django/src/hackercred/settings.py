@@ -115,6 +115,8 @@ TEMPLATE_DIRS = (
 LOGIN_REDIRECT_URL = '/'
 LOGIN_URL = '/login/'
 
+AUTHENTICATION_BACKENDS = ('app.backends.EmailAuthBackend',)
+
 AUTH_PROFILE_MODULE = 'app.UserProfile'
 
 INSTALLED_APPS = (

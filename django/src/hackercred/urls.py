@@ -1,5 +1,6 @@
 from django.conf.urls.defaults import patterns, include, url
 from django.contrib import admin
+from hackercred.app.forms import LoginForm
 import settings
 
 # Uncomment the next two lines to enable the admin:
@@ -17,7 +18,7 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', 'app.views.index'),
     (r'^logout/$', 'app.views.logout'),
-    (r'^login/$', 'django.contrib.auth.views.login'),
+    (r'^login/$', 'django.contrib.auth.views.login', {'authentication_form' : LoginForm}),
     (r'^register/$', 'app.views.register'),
     (r'^user/(?P<id>[0-9]+)/$', 'app.views.view_user'),
     (r'^profile/$', 'app.views.edit_profile'),
